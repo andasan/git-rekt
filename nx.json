@@ -1,0 +1,41 @@
+{
+    "npmScope": "happyorg",
+    "affected": {
+        "defaultBase": "main"
+    },
+    "workspaceLayout": {
+        "appsDir": "demos",
+        "libsDir": "packages"
+    },
+    "implicitDependencies": {
+        "package.json": {
+            "dependencies": "*",
+            "devDependencies": "*"
+        },
+        "tsconfig.base.json": "*",
+        "nx.json": "*"
+    },
+    "namedInputs": {
+        "default": ["{projectRoot}/**/*"],
+        "production": ["!{projectRoot}/**/*.spec.tsx"]
+    },
+    "targetDefaults": {
+        "build": {
+            "inputs": ["production", "^production"],
+            "dependsOn": ["^build"]
+        }
+    },
+    "generators": {
+        "@nrwl/js:library": {
+            "buildable": true
+        }
+    },
+    "tasksRunnerOptions": {
+        "default": {
+            "runner": "nx/tasks-runners/default",
+            "options": {
+                "cacheableOperations": ["build", "lint", "test", "e2e"]
+            }
+        }
+    }
+}
